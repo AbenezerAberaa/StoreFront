@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-def calculate():
-    x = 1
-    y = 2
-    return x
+from django.core.exceptions import ObjectDoesNotExist
+from store.models import Product
+
 def say_Hello(request):
-    x = calculate()
-    return render(request, 'hello.html', {"name": "Abeny"})
+    products = Product.objects.filter(title__icontains = "coffee")
+
+    
+
+    return render(request, 'hello.html', {"name": "Abeny", "products": list(products)})
 
 
