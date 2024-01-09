@@ -1,13 +1,23 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.core.exceptions import ObjectDoesNotExist
-from store.models import Product
+from django.db import transaction
+from store.models import Product, Collection, Order, OrderItem
 
 def say_Hello(request):
-    products = Product.objects.filter(title__icontains = "coffee")
+    with transaction.atomic():
+        order = Order()
+        order.customer_id = 1
+        order.save()
 
-    
+        item = OrderItem()
+        item.order = order
+        item.product_id = 1
+        item.quantity = 1
+        item.unit_price = 10
+        item.save()
 
-    return render(request, 'hello.html', {"name": "Abeny", "products": list(products)})
 
 
+    return render(request, 'hello.html', {"name": "Abeny"})
+
+
+ 
