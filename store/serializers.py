@@ -29,12 +29,17 @@ class ReviewSerializers(serializers.ModelSerializer):
         product_id = self.context['product_id']
         return Review.objects.create(product_id=product_id, **validated_data)
     
+class SimpleProductSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'title', 'unit_price']
+    
 class CartItemSerializers(serializers.ModelSerializer):
-    Product = ProductSerializers
+    product = SimpleProductSerializers()
     class Meta:
         model = CartItem
         fields = ['id', 'product', 'quantity']
-    
+
 class CartSerializers(serializers.ModelSerializer):
     id = serializers.UUIDField(read_only=True)
     items = CartItemSerializers(many=True)
@@ -42,6 +47,11 @@ class CartSerializers(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ['id', 'items']
+
+
+    
+    
+
 
     
     
