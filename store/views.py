@@ -9,7 +9,7 @@ from rest_framework import status
 from .pagination import DefaultPagination
 from .filters import ProductFilter
 from .models import Cart, OrderItem, Product, Collection, Review
-from .serializers import CartSerializers, CollectionSerializer, ProductSerializers, ReviewSerializers
+from .serializers import CollectionSerializer, ProductSerializers, ReviewSerializers, CartItemSerializers, CartSerializers
 
 
 # Create your views here.
@@ -53,7 +53,8 @@ class ReviewViewSet(ModelViewSet):
          return Review.objects.filter(product_id=self.kwargs['product_pk']).all()
      def get_serializer_context(self):
          return {"product_id": self.kwargs['product_pk']}
-     
+
 class CartViewSet(CreateModelMixin, GenericViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializers
+
