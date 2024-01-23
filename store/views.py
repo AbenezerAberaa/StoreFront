@@ -12,7 +12,7 @@ from .permissions import FullDjangoModelPermissionos, IsAdminOrReadOnly, ViewCus
 from .pagination import DefaultPagination
 from .filters import ProductFilter
 from .models import Cart, CartItem, Customer, Order, OrderItem, Product, Collection, Review
-from .serializers import AddCartItemSerializer, CollectionSerializer, CustomerSerializer, OrderSerializer, ProductSerializers, ReviewSerializers, CartItemSerializers, CartSerializers, UpdateCartItemSerializer
+from .serializers import AddCartItemSerializer, CollectionSerializer, CreateOrderSerializer, CustomerSerializer, OrderSerializer, ProductSerializers, ReviewSerializers, CartItemSerializers, CartSerializers, UpdateCartItemSerializer
 
 
 # Create your views here.
@@ -109,9 +109,15 @@ class CustomerViewSet(ModelViewSet):
             return Response(serializer.data)
         
 class OrderViewSet(ModelViewSet):
-    
-    serializer_class = OrderSerializer
+
     permission_classes = [IsAuthenticated]
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return CreateOrderSerializer
+        return OrderSerializer
+
+    def get_serializer_context(self):
+        return {'user_id': self.request.user.id}
 
     def get_queryset(self):
         user = self.request.user
