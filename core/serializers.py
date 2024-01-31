@@ -1,10 +1,12 @@
-from djoser.serializers import UserSerializer as BaseUserSerializer, UserCreateSerializer as BaseUserRegistrationSerializer, UserCreateSerializer as BaseUserCreateSerializer
+from store.models import Customer
+from djoser.serializers import UserSerializer as BaseUserSerializer, UserCreateSerializer as BaseUserCreateSerializer
 
-from StoreFront.store.models import Customer
 
-class UserRegistrationSerializer(BaseUserRegistrationSerializer):
-    class Meta(BaseUserRegistrationSerializer.Meta):
-        fields = ('id', 'email', 'username', 'password', 'first_name', 'last_name')
+class UserCreateSerializer(BaseUserCreateSerializer):
+    class Meta(BaseUserCreateSerializer.Meta):
+        fields = ['id', 'username', 'password',
+                  'email', 'first_name', 'last_name']
+
 
 class UserCreateSerializer(BaseUserCreateSerializer):
 
@@ -13,4 +15,4 @@ class UserCreateSerializer(BaseUserCreateSerializer):
 
 class UserSerializer(BaseUserSerializer):
     class Meta(BaseUserSerializer.Meta):
-        fields = ('id', 'email', 'username', 'first_name', 'last_name')
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
