@@ -11,13 +11,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework import status
 from .filters import ProductFilter
-<<<<<<< HEAD
 from .models import Cart, CartItem, Collection, Customer, Order, OrderItem, Product, ProductImage, Review
 from .serializers import AddCartItemSerializer, CartItemSerializer, CartSerializer, CollectionSerializer, CreateOrderSerializer, CustomerSerializer, OrderSerializer, ProductImageSerializer, ProductSerializer, ReviewSerializer, UpdateCartItemSerializer, UpdateOrderSerializer
-=======
-from .models import Cart, CartItem, Customer, Order, OrderItem, Product, Collection, Review
-from .serializers import AddCartItemSerializer, CollectionSerializer, CreateOrderSerializer, CustomerSerializer, OrderSerializer, ProductSerializers, ReviewSerializers, CartItemSerializers, CartSerializers, UpdateCartItemSerializer, UpdateOrderSerializer
->>>>>>> refs/remotes/origin/abeny2
 
 
 class ProductViewSet(ModelViewSet):
