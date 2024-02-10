@@ -2,12 +2,7 @@ from decimal import Decimal
 from django.db import transaction
 from rest_framework import serializers
 from .signals import order_created
-<<<<<<< HEAD
 from .models import Cart, CartItem, Customer, Order, OrderItem, Product, Collection, ProductImage, Review
-
-=======
-from .models import Cart, CartItem, Customer, Order, OrderItem, Product, Collection, Review
->>>>>>> refs/remotes/origin/abeny2
 
 class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -140,19 +135,11 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = ['id', 'customer', 'placed_at', 'payment_status', 'items']
 
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/abeny2
 class UpdateOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['payment_status']
 
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/abeny2
 class CreateOrderSerializer(serializers.Serializer):
     cart_id = serializers.UUIDField()
 
